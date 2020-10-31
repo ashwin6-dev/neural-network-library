@@ -21,12 +21,13 @@ result = m1 @ m2 # Matrix multiply m1 and m2
 
 print (result, result.gradient(m2)) # result.gradient(m2) : Find the derivative of "result" with respect to "m2"
 
+"""
 ### Output ###
 
-"""
 Tensor(value=[[125000]]) Tensor(value=[[75000]])
 Tensor(value=[[12 12]
  [18 18]]) Tensor(value=[[5. 5.]
  [5. 5.]
  [5. 5.]])
+
 """
