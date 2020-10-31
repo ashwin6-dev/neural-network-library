@@ -89,6 +89,9 @@ class Tensor(object):
     def __matmul__(self, other):
         return matmul(self, other)
 
+    def __pow__(self, other):
+        return pow(self, other)
+
     @staticmethod
     def randn(*args):
         value = np.random.randn(*args)
@@ -200,4 +203,20 @@ def matmul(t1, t2):
        return grad
 
     t.backward = matmul_backward
+    return t
+
+def pow(t1, t2):
+    t = Tensor(t1.value ** t2.value)
+    t.parents = [t1, t2]
+
+    def pow_backward(v, parents, grad):
+        local_grad = 0
+        if v == parents[0]:
+            local_grad = t2.value * (t1.value ** (np.subtract(t2.value, 1))) 
+
+        grad.value = local_grad
+
+        return grad
+    
+    t.backward = pow_backward
     return t
